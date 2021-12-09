@@ -2,17 +2,22 @@ import os
 
 from client import Client
 
-if __name__ == '__main__':
-    username = "user1"
-    password = "pass1"
 
+def auth():
     # SaltySugar REST_API_server
     # https://github.com/SaltySugar32/REST_API_server
     url = "http://52.168.122.249:5000"
 
-    status = True
-    client = Client(url, username, password)
+    print("-"*10+"Login"+"-"*10)
+    print("\tusername: ", end=' ')
+    username = input().strip().split()
+    print("\tpassword: ", end=' ')
+    password = input().strip().split()
+    return Client(url, username, password)
 
+
+def cmd_terminal_loop():
+    status = True
     print("Enter symbol '?' for help")
     while status:
         print('>_', end=' ')
@@ -51,8 +56,12 @@ if __name__ == '__main__':
                 assert len(cmd) >= 2
                 client.delete_file(cmd[1])
 
+            elif cmd[0] == "relogin":
+                client = auth()
+
+            # Help-message
             elif cmd[0] == "?":
-                print("-"*100)
+                print("-" * 100)
                 print("\tShow TODO list: get")
                 print("\tAdd TODO: post <string>")
                 print("\tUpdate TODO: put <int> <string>")
@@ -61,10 +70,16 @@ if __name__ == '__main__':
                 print("\tUpload file: postf <path>")
                 print("\tDownload file: getf <string>")
                 print("\tDelete file: deletef <string>")
+                print("\tRelogin: relogin")
                 print("-" * 100)
 
             else:
                 status = False
 
         except:
-            print("Ошибка ввода")
+            print("Input Error")
+
+
+if __name__ == '__main__':
+    client = auth()
+    cmd_terminal_loop()
