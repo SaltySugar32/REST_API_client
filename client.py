@@ -17,8 +17,12 @@ class Client:
         self.files_url = "/files/"
 
         response = requests.post(self.url + self.user_url, data=self.body)
-        token = "Bearer " + response.json()['access_token']
-        self.headers = {"Authorization": token}
+        if response.status_code != 201 and response.status_code != 200:
+            print(response.json())
+
+        else:
+            token = "Bearer " + response.json()['access_token']
+            self.headers = {"Authorization": token}
 
     def get_todo(self):
         response = requests.get(self.url + self.todo_url, headers=self.headers)
