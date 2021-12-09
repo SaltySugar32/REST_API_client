@@ -13,6 +13,7 @@ if __name__ == '__main__':
     status = True
     client = Client(url, username, password)
 
+    print("Enter symbol '?' for help")
     while status:
         print('>_', end=' ')
         cmd = input().strip().split()
@@ -33,6 +34,34 @@ if __name__ == '__main__':
             elif cmd[0] == "delete":
                 assert len(cmd) >= 2
                 client.delete_todo(cmd[1])
+
+            elif cmd[0] == "getf":
+                if len(cmd) >= 2:
+                    client.download_file(cmd[1])
+
+                else:
+                    client.get_files()
+
+            elif cmd[0] == "postf":
+                assert len(cmd) >= 2
+                file_path = " ".join(cmd[1:])
+                client.post_files(file_path)
+
+            elif cmd[0] == "deletef":
+                assert len(cmd) >= 2
+                client.delete_file(cmd[1])
+
+            elif cmd[0] == "?":
+                print("-"*100)
+                print("\tShow TODO list: get")
+                print("\tAdd TODO: post <string>")
+                print("\tUpdate TODO: put <int> <string>")
+                print("\tDelete TODO: delete <int>")
+                print("\tGet files: getf")
+                print("\tUpload file: postf <path>")
+                print("\tDownload file: getf <string>")
+                print("\tDelete file: deletef <string>")
+                print("-" * 100)
 
             else:
                 status = False
