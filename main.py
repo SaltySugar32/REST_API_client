@@ -9,11 +9,9 @@ def auth():
     url = "http://52.168.122.249:5000"
 
     print("-"*10+"Login"+"-"*10)
-    print("\tusername: ", end=' ')
-    username = input().strip().split()
-    print("\tpassword: ", end=' ')
-    password = input().strip().split()
-    return Client(url, username, password)
+    username_input = input("\tusername: ").strip().split()[0]
+    password_input = input("\tpassword: ").strip().split()[0]
+    return Client(url, username_input, password_input)
 
 
 def cmd_terminal_loop():
@@ -83,4 +81,3 @@ def cmd_terminal_loop():
 
 if __name__ == '__main__':
     cmd_terminal_loop()
-    
