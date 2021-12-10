@@ -17,6 +17,7 @@ def auth():
 
 
 def cmd_terminal_loop():
+    client = auth()
     status = True
     print("Enter symbol '?' for help")
     while status:
@@ -81,5 +82,5 @@ def cmd_terminal_loop():
 
 
 if __name__ == '__main__':
-    client = auth()
     cmd_terminal_loop()
+    
