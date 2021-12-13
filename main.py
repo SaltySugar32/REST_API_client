@@ -70,9 +70,10 @@ def cmd_terminal_loop():
                 print("\tDownload file: getf <string>")
                 print("\tDelete file: deletef <string>")
                 print("\tRelogin: relogin")
+                print("\tExit program: exit")
                 print("-" * 100)
 
-            else:
+            elif cmd[0] == "exit":
                 status = False
 
         except:
